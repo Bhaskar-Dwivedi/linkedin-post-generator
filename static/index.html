@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkedIn Post Writer AI</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- html2pdf for PDF generation -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body class="dark-theme">
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-left">
+            <i class='bx bxl-linkedin-square logo-icon'></i>
+            <span class="logo-text">LinkedIn Post Writer AI</span>
+        </div>
+        <div class="nav-right">
+            <button id="theme-toggle" class="icon-btn" title="Toggle Theme">
+                <i class='bx bx-sun'></i>
+            </button>
+            <button id="settings-btn" class="icon-btn" title="Settings">
+                <i class='bx bx-cog'></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Main Layout -->
+    <main class="main-layout">
+        
+        <!-- Left Panel: Input -->
+        <section class="left-panel">
+            <form id="post-form">
+                
+                <div class="card input-card">
+                    <label for="title">Project / Internship Title</label>
+                    <input type="text" id="title" name="title" placeholder="e.g. Software Engineering Intern" required>
+                </div>
+
+                <div class="card input-card">
+                    <label for="organization">Organization Name</label>
+                    <input type="text" id="organization" name="organization" placeholder="e.g. Google" required>
+                </div>
+
+                <div class="card input-card">
+                    <label for="duration">Duration</label>
+                    <input type="text" id="duration" name="duration" placeholder="e.g. May 2023 - Aug 2023" required>
+                </div>
+
+                <div class="card input-card">
+                    <label for="skills">Skills Learned (Comma separated)</label>
+                    <input type="text" id="skills" name="skills" placeholder="e.g. Python, React, Teamwork" required>
+                </div>
+
+                <div class="card input-card">
+                    <label for="bullets">Bullet Points (What did you do?)</label>
+                    <textarea id="bullets" name="bullets" rows="4" placeholder="- Developed a new feature...&#10;- Collaborated with..." required></textarea>
+                </div>
+
+                <div class="card input-card settings-card">
+                    <label for="tone">Generation Settings (Tone)</label>
+                    <select id="tone" name="tone">
+                        <option value="professional">Professional</option>
+                        <option value="casual">Casual</option>
+                        <option value="excited">Excited</option>
+                    </select>
+                </div>
+
+                <div class="card input-card">
+                    <label for="wordCount">Target Word Count</label>
+                    <input type="number" id="wordCount" name="wordCount" placeholder="e.g. 150" value="150" min="50" max="1000" required>
+                </div>
+
+                <button type="submit" id="generate-btn" class="btn-primary">
+                    <i class='bx bx-magic-wand'></i> Generate Post
+                </button>
+
+            </form>
+        </section>
+
+        <!-- Right Panel: Output -->
+        <section class="right-panel">
+            <div class="card output-card">
+                
+                <!-- Initial State -->
+                <div id="empty-state" class="state-container">
+                    <div class="empty-icon"><i class='bx bx-layer'></i></div>
+                    <h3>No post generated yet</h3>
+                    <p>Fill out the details on the left and hit generate.</p>
+                </div>
+
+                <!-- Loading State -->
+                <div id="loading-state" class="state-container hidden">
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    <p class="loading-text">Crafting your professional post...</p>
+                </div>
+
+                <!-- Results State -->
+                <div id="result-state" class="hidden">
+                    <div class="result-actions">
+                        <button class="btn-action" id="copy-btn" title="Copy to Clipboard"><i class='bx bx-copy'></i> Copy</button>
+                        <button class="btn-action" id="download-txt-btn" title="Download as TXT"><i class='bx bx-file-blank'></i> TXT</button>
+                        <button class="btn-action" id="download-pdf-btn" title="Download as PDF"><i class='bx bxs-file-pdf'></i> PDF</button>
+                        <button class="btn-action" id="regenerate-btn" title="Regenerate"><i class='bx bx-refresh'></i> Regenerate</button>
+                        <span class="word-count-display" id="word-count-display" style="margin-left: auto; color: var(--text-muted); font-size: 0.9rem; display: flex; align-items: center;">Words: 0</span>
+                    </div>
+
+                    <div class="generated-content" id="post-content-area">
+                        <!-- Content will be injected here -->
+                        <div class="content-section" id="hook-section"></div>
+                        <div class="content-section" id="main-content-section"></div>
+                        <div class="content-section hashtags" id="hashtags-section"></div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
