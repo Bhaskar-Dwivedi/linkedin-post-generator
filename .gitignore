@@ -1,4 +1,40 @@
+# Environment files
 .env
+.envrc
+
+# Python cache
 __pycache__/
-venv/
+*.py[codz]
+*$py.class
+
+# Virtual environments
 .venv/
+venv/
+env/
+ENV/
+
+# Build files
+build/
+dist/
+*.egg-info/
+
+# Flask
+instance/
+.webassets-cache
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter
+.ipynb_checkpoints
+
+# VS Code temporary files
+tempCodeRunnerFile.py
+
+# Type checkers and linters
+.mypy_cache/
+.pyre/
+.pytype/
+.ruff_cache/
