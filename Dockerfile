@@ -21,4 +21,4 @@ ENV FLASK_APP=app.py
 
 # Run the application with gunicorn
 # Gunicorn will listen on the PORT environment variable (set by Render) or default to 5000
-CMD ["gunicorn", "--bind", "0.0.0.0:${PORT:-5000}", "--workers", "2", "--timeout", "60", "app:app"]
+CMD exec gunicorn --bind 0.0.0.0:${PORT:-5000} --workers 2 --timeout 60 app:app
